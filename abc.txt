@@ -7,3 +7,5 @@ do fix
 
 
 iss53question is build!
+
+doing in linux
