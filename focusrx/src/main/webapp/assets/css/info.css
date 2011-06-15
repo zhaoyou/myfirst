@@ -1,0 +1,53 @@
+#searchbar {
+  border-color: black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+  }
+  
+.line{
+  margin: 1px 2px 18px 3px;
+  }
+  
+  .pli{
+    margin-top: 8px;
+  }
+  .cli{
+    margin-top:7px;
+  }
+  .pcontent{
+    margin-left: 35px;
+    font-size: 15px;
+  }
+  .ccontent{
+    margin-left: 48px;
+    margin-top: 3px;
+    font-size: 15px;
+  }
+  
+  .ptitle{
+    color: #77D9EC;
+    font-style: italic;
+  }
+  .ctitle{
+    font-style: italic;
+    color: #A1B4C4;
+  }
+  .selfTitle{
+    margin-left: 36px; 
+    color: #77D9EC;
+     font-style: italic;
+  }
+  #selfText{
+    margin-left: 65px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  #selfattachment{
+    margin-left: 65px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  

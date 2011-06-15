@@ -1,0 +1,973 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+	version="2.0">
+	<!--
+	<named-query name="User.findAll">
+		<query>SELECT u FROM User u WHERE u.validationStatus = 'VALIDATED'</query>
+	</named-query>
+
+	<named-query name="User.findByCellphone">
+		<query>SELECT u FROM User u WHERE u.cellPhone = :cellphone AND u.validationStatus = 'VALIDATED'</query>
+	</named-query>
+
+	<named-query name="User.findByEmail">
+		<query>SELECT u FROM User u WHERE u.email = :email AND u.validationStatus = 'VALIDATED'</query>
+	</named-query>
+
+	<named-query name="BankAccountInfo.findAll">
+		<query>SELECT b FROM BankAccountInfo b</query>
+	</named-query>
+
+	<named-query name="MailSecurity.findByUserID">
+		<query>SELECT m FROM MailSecurity m WHERE m.user.userId = ?1</query>
+	</named-query>
+
+	<named-query name="MailSecurity.findByEmail">
+		<query>SELECT m FROM MailSecurity m WHERE m.email = ?1</query>
+	</named-query>
+
+	<named-query name="Obligor.findAll">
+		<query>SELECT o FROM Obligor o</query>
+	</named-query>
+
+	<named-query name="Loaner.findByUserId">
+		<query>SELECT l FROM Loaner l WHERE l.user.userId = :userId</query>
+	</named-query>
+
+	<named-query name="View.UserProfile.findByEmail">
+		<query>
+			SELECT DISTINCT
+			NEW com.xiaodai.service.view.UserProfileView(
+				u.nickname,
+				l.chineseName,
+				l.province,
+				l.city,
+				l.credentialType,
+				l.credentialId,
+				u.cellPhone,
+				u.email,
+				u.registerSource,
+				l.profile,
+				l.loanerImageLocation
+			)
+			FROM Loaner l, User u
+			WHERE l.user = u
+			AND u.validationStatus = 'VALIDATED'
+			AND u = :user
+		</query>
+	</named-query>
+
+	<named-query name="View.LoanList.findAll">
+		<query>
+			SELECT o.obligorInfo.chineseName, l.usageType, o.loanGroup.loanCenter.village.town.province, o.loanGroup.loanCenter.village.town.townName, o.loanGroup.loanCenter.village.villageName, l.loanAmount, l.loanPeriod, l.expectedEndDate, l.publishDate
+			FROM Obligor o, Loan l 
+			WHERE l.usageType = ?1 AND o.loanGroup.loanCenter.village.town.province = ?2 AND o.loanGroup.loanCenter.village.town.townName = ?3
+		</query>
+	</named-query>
+	<named-query name="Crediter.findAll">
+		<query>
+			SELECT c FROM Crediter c
+		</query>
+	</named-query>
+
+	<named-query name="Town.findAll">
+		<query>
+			SELECT t FROM Town t
+		</query>
+	</named-query>
+	
+	<named-query name="Village.findAll">
+		<query>
+			SELECT v FROM Village v
+		</query>
+	</named-query>
+	
+	<named-query name="Village.findByTownId">
+		<query>
+			SELECT v FROM Village v WHERE v.town.townId= :townId
+		</query>
+	</named-query>
+	
+	<named-query name="Loan.findAll">
+		<query>
+			SELECT l FROM Loan l
+		</query>
+	</named-query>
+	<named-query name="Town.findAllCount">
+		<query>
+			SELECT count(*) FROM Town
+		</query>
+	</named-query>
+
+	<named-query name="Village.findAllCount">
+		<query>
+			SELECT count(*) FROM Village
+		</query>
+	</named-query>
+
+	<named-query name="Crediter.findAllCount">
+		<query>
+			SELECT count(*) FROM Crediter
+		</query>
+	</named-query>
+	<named-query name="Obligor.findAllCount">
+		<query>
+			SELECT count(*) FROM Town
+		</query>
+	</named-query>
+	
+	<named-query name="Loan.findAllCount">
+		<query>
+			SELECT count(*) FROM Loan
+		</query>
+	</named-query>
+
+	<named-query name="[List(Object[])]-[loanId:Integer]">
+		<query>
+			SELECT DISTINCT l, o
+			FROM Loan l
+			LEFT JOIN l.obligor o
+			LEFT JOIN FETCH o.propertyInfo.houseInfo.houseStructures
+			LEFT JOIN FETCH o.propertyInfo.moneyInfo.otherDebtSources
+			LEFT JOIN FETCH o.obligorImages
+			WHERE l.loanId = :loanId
+		</query>
+	</named-query>
+
+	<named-query name="View.LoanDetail.findByLoanId">
+		<query>
+			SELECT 
+			NEW com.xiaodai.service.view.LoanDetailView(
+				o.obligorinfoId,
+				o.obligorInfo.chineseName,
+				o.obligorInfo.sex,
+				o.obligorInfo.idCardNumber,
+				o.obligorInfo.educationalLevel,
+				o.obligorInfo.maritalInfo.maritalStatus,
+				o.obligorInfo.childrenInfo,
+				o.propertyInfo.moneyInfo.deposit,
+				o.propertyInfo.houseInfo.houseArea,
+				o.propertyInfo.houseInfo.roomCount,
+				o.obligorInfo.medicare,
+				o.locationStatus,
+				o.obligorIconLocation,
+				o.loanGroup.loanCenter.village.town.province, 
+				o.loanGroup.loanCenter.village.town.city,
+				o.loanGroup.loanCenter.village.town.townName,
+				o.loanGroup.loanCenter.village.villageName,
+				l.loanId,
+				l.loanAmount, 
+				l.loanPeriod,
+				l.loanPeriodRange,
+				l.expectedEndDate,
+				l.usageType,
+				l.usageInfo,
+				l.profitEvaluate,
+				l.riskAnalysis,
+				l.boughtPercent
+			) 
+			FROM Obligor o, Loan l
+			WHERE l.obligor = o
+			AND l.loanId = :loanId
+		</query>
+	</named-query>
+
+	<named-query name="View.LoanList.findByLoanId.CountQuery">
+		<query>
+			SELECT COUNT(*) FROM Obligor o, Loan l WHERE l.loanId = ?1
+		</query>
+	</named-query>
+
+	<named-query name="View.LoanItemList.findAllByLoanId">
+		<query>
+			SELECT NEW com.xiaodai.service.view.LoanItemView(
+				l.loanItemAmount,
+				l.loanPeriod,
+				li.loanItemIndex,
+				li.loanItemId,
+				CASE 
+					WHEN li IN (SELECT li FROM LoanItem li WHERE :user MEMBER OF li.users) THEN 'COLLECTED'
+					ELSE li.itemStatus
+				END,
+				(SELECT COUNT(DISTINCT li.loanItemId) FROM li)
+			)
+			FROM Loan l, LoanItem li
+			WHERE li.loan = l
+			AND l.loanId = :loanId
+		</query>
+	</named-query>
+	
+	<named-query name="[List(LoanItemView)]-[user:User, loanId:Integer]">
+		<query>
+			SELECT NEW com.xiaodai.service.view.LoanItemView(
+				l.loanItemAmount,
+				l.loanPeriod,
+				li.loanItemIndex,
+				li.loanItemId,
+				CASE
+					WHEN li IN (SELECT li FROM LoanItem li WHERE :user MEMBER OF li.users) THEN 'COLLECTED'
+					ELSE li.itemStatus
+				END,
+				(SELECT COUNT(DISTINCT li.loanItemId) FROM li WHERE li.loan = l AND l.loanId = :loanId AND li.itemStatus = 'BUYABLE')
+			)
+			FROM Loan l, LoanItem li
+			WHERE li.loan = l
+			AND l.loanId = :loanId
+			AND li.itemStatus = 'BUYABLE'
+		</query>
+	</named-query>
+	
+	<named-query name="[List(LoanItemView)]-[boughtLoanItems]-[loanId:Integer]">
+		<query>
+			SELECT NEW com.xiaodai.service.view.LoanItemView(
+				l.loanItemAmount,
+				li.loanItemIndex,
+				li.loanItemId,
+				li.order.orderNumber,
+				(SELECT COUNT(DISTINCT li.loanItemId) FROM li WHERE li.loan = l AND l.loanId = :loanId AND li.itemStatus = 'BOUGHT')
+			)
+			FROM Loan l, LoanItem li
+			WHERE li.loan = l
+			AND l.loanId = :loanId
+			AND li.itemStatus = 'BOUGHT'
+		</query>
+	</named-query>
+	
+	<named-query name="View.LoanCartItem.COUNT">
+		<query>
+			SELECT COUNT(DISTINCT l.loanId)
+			FROM Loan l, LoanItem li, User u
+			WHERE li.loan = l
+			AND li.order IS NULL
+			AND u MEMBER OF li.users
+			AND li MEMBER OF u.loanItems
+			AND u = ?1
+		</query>
+	</named-query>
+	
+	<named-query name="View.LoanCartItem.findAll">
+		<query>
+			SELECT DISTINCT
+			NEW com.xiaodai.service.view.LoanCartItemView(
+				l.loanId,
+				ob.obligorInfo.chineseName,
+				l.loanItemAmount,
+				l.loanAmount,
+				l.loanPeriod,
+				(SELECT COUNT(li.loanItemId) FROM li WHERE u MEMBER OF li.users AND li MEMBER OF u.loanItems AND li.loan = l),
+				(SELECT SUM(li.loanItemIndex) FROM li WHERE u MEMBER OF li.users AND li MEMBER OF u.loanItems AND li.loan = l),
+				(SELECT COUNT(DISTINCT l.loanId) FROM l WHERE (SELECT COUNT(li.loanItemId) FROM LoanItem li, User u WHERE u = :user AND u MEMBER OF li.users AND li MEMBER OF u.loanItems AND li.loan = l) != 0)
+			)
+			FROM Loan l, Obligor ob, User u, LoanItem li
+			WHERE l.obligor = ob
+			AND li.loan = l
+			AND u MEMBER OF li.users
+			AND li MEMBER OF u.loanItems
+			AND u = :user
+			AND li.itemStatus = 'BUYABLE'
+		</query>
+	</named-query>
+
+	<named-query name="[count:Long]-[List(UnavailableLoanView)]-[user:User]">
+		<query>
+			SELECT COUNT(DISTINCT l.loanId)
+			FROM Obligor o, Loan l
+			WHERE l.obligor = o
+			AND l IN (SELECT li.loan FROM LoanItem li WHERE ?1 MEMBER OF li.users AND li.itemStatus != 'BUYABLE')
+		</query>
+	</named-query>
+
+	<named-query name="[List(UnavailableLoanView)]-[user:User]">
+		<query>
+			SELECT
+			NEW com.xiaodai.service.view.UnavailableLoanView(
+				l.loanId,
+				o.obligorInfo.chineseName,
+				o.loanGroup.loanCenter.village.town.province,
+				o.loanGroup.loanCenter.village.town.city,
+				o.loanGroup.loanCenter.village.town.townName,
+				o.loanGroup.loanCenter.village.villageName,
+				l.usageType,
+				l.loanAmount,
+				l.loanPeriod,
+				l.expectedEndDate,
+				(SELECT COUNT(DISTINCT l.loanId) FROM l WHERE l IN (SELECT li.loan FROM LoanItem li WHERE :user MEMBER OF li.users AND li.itemStatus != 'BUYABLE'))
+			)
+			FROM Obligor o, Loan l
+			WHERE l.obligor = o
+			AND l IN (SELECT li.loan FROM LoanItem li WHERE :user MEMBER OF li.users AND li.itemStatus != 'BUYABLE')
+		</query>
+	</named-query>
+	
+	<named-query name="View.AccountBalance.COUNT">
+		<query>SELECT COUNT(DISTINCT ar) FROM AccountRecord ar WHERE ar.user = ?1</query>
+	</named-query>
+
+	<named-query name="View.AccountBalance.findAll">
+		<query>
+			SELECT 
+			NEW com.xiaodai.service.view.AccountBalanceView(
+				ar.operationTime,
+				ar.accountVariation,
+				ar.principal,
+				ar.interest,
+				ar.accountBalance,
+				ar.operationType
+			)
+			FROM AccountRecord ar
+			WHERE ar.user = ?1
+			ORDER BY ar.operationTime DESC
+		</query>
+	</named-query>
+
+	<named-query name="View.PendingLoan.COUNT">
+		<query>
+			SELECT COUNT(DISTINCT l.loanId)
+			FROM Obligor ob, Loan l, LoanItem li, Order o
+			WHERE l.obligor = ob
+			AND li.loan = l
+			AND li.order = o
+			AND o.user = ?1
+		</query>
+	</named-query>
+
+	<named-query name="View.PendingLoan.findAll">
+		<query>
+			SELECT DISTINCT
+			NEW com.xiaodai.service.view.PendingLoanView(
+				ob.obligorIconLocation,
+				ob.obligorInfo.chineseName,
+				(SELECT COUNT(li.loanItemId) FROM li WHERE li.itemStatus = 'BOUGHT' AND li.loan = l),
+				(SELECT SUM(li.loanItemIndex) FROM li WHERE li.itemStatus = 'BOUGHT' AND li.loan = l),
+				l.loanItemAmount,
+				l.loanId
+			)
+			FROM Obligor ob, Loan l, LoanItem li, Order o
+			WHERE l.obligor = ob
+			AND li.loan = l
+			AND li.order = o
+			AND o.user = ?1
+		</query>
+	</named-query>
+	
+	<named-query name="[List(loanItemIndex:Integer)]-[user:User, loanId:Integer]">
+		<query>
+			SELECT li.loanItemIndex
+			FROM LoanItem li, Order o
+			WHERE li.order = o
+			AND li.loan.loanId = :loanId
+			AND o.user = :user
+			AND li.itemStatus = 'BOUGHT'
+			ORDER BY li.loanItemIndex ASC
+		</query>
+	</named-query>
+	
+	<named-query name="View.LentLoan.COUNT">
+		<query>
+			SELECT COUNT(DISTINCT l.loanId)
+			FROM Obligor ob, Loan l, LoanItem li, Order o
+			WHERE l.obligor = ob
+			AND li.loan = l
+			AND li.order = o
+			AND o.user = ?1
+			AND li.itemStatus IN ('PAID', 'REPAID')
+		</query>
+	</named-query>
+
+	<named-query name="View.LentLoan.findAll">
+		<query>
+			SELECT DISTINCT
+			NEW com.xiaodai.service.view.LentLoanView(
+				ob.obligorIconLocation,
+				ob.obligorInfo.chineseName,
+				(SELECT COUNT(li.loanItemId) FROM li WHERE li.itemStatus = 'PAID' AND li.loan = l),
+				(SELECT COUNT(li.loanItemId) FROM li WHERE li.itemStatus = 'REPAID' AND li.loan = l),
+				(SELECT SUM(li.loanItemIndex) FROM li WHERE li.itemStatus = 'REPAID' AND li.loan = l),
+				(SELECT SUM(li.loanItemIndex) FROM li WHERE li.itemStatus = 'PAID' AND li.loan = l),
+				l.loanItemAmount,
+				l.loanId
+			)
+			FROM Obligor ob, Loan l, LoanItem li, Order o
+			WHERE l.obligor = ob
+			AND li.loan = l
+			AND li.order = o
+			AND o.user = ?1
+			AND li.itemStatus IN ('PAID', 'REPAID')
+		</query>
+	</named-query>
+
+	<named-query name="View.CrediterInfoView.findByObligorId">
+		<query>
+			SELECT 
+			NEW com.xiaodai.service.view.CrediterInfoView(
+				c.chineseName,
+				c.imageUrl,
+				c.village.town.province,
+				c.village.town.city,
+				c.village.town.townName,
+				(
+					SELECT COUNT(*)
+					FROM Obligor o JOIN o.loanGroup lg JOIN lg.loanCenter lc JOIN lc.crediter c
+					WHERE o.loan.loanStatus = 'FINISHED'
+				),
+				c.cellPhone
+			)
+			FROM Crediter c
+			WHERE c.crediterId = (SELECT o.loanGroup.loanCenter.crediter.crediterId FROM Obligor o WHERE o.obligorinfoId = :obligorinfoId)
+		</query>
+	</named-query>
+	
+	<named-query name="View.SameTypeLoan.findByUsageType">
+		<query>
+			SELECT 
+			NEW com.xiaodai.service.view.SameTypeLoanView(
+				o.obligorInfo.chineseName,
+				l.loanAmount,
+				l.loanPeriod,
+				(SELECT COUNT(*) FROM LoanItem li WHERE li.itemStatus = 'BOUGHT' AND li.loan = l),
+				l.loanId
+			)
+			FROM Loan l, Obligor o 
+			WHERE l.obligor = o AND l.usageType = :usageType 
+			AND l.loanId != :loanId
+		</query>
+	</named-query>
+	
+	<named-query name="View.AccountPersonalPanel">
+		<query>
+			SELECT
+			NEW com.xiaodai.service.view.AccountPersonalPanelView(
+				l.loanItemAmount,
+				(SELECT COUNT(li) FROM LoanItem li WHERE li.loan = l AND li.itemStatus = 'BOUGHT' AND li.order.user = :user),
+				(SELECT COUNT(li) FROM LoanItem li WHERE li.loan = l AND li.itemStatus IN ('PAID', 'REPAID') AND li.order.user = :user)
+			)
+			FROM Loan l
+		</query>
+	</named-query>
+	
+	<named-query name="View.AccountPersonalPanel.Balance">
+		<query>
+			SELECT ar.accountBalance 
+			FROM AccountRecord ar 
+			WHERE :user = ar.user
+			AND ar.operationTime = (SELECT MAX(ar.operationTime) FROM AccountRecord ar WHERE :user = ar.user)
+		</query>
+	</named-query>
+	
+	<named-query name="View-RecentLoan-User">
+		<query>
+			SELECT
+			NEW com.xiaodai.service.view.RecentLoanView(
+				l.loanId,
+				o.obligorInfo.chineseName,
+				o.obligorIconLocation,
+				rl.viewTime
+			)
+			FROM Loan l, Obligor o, RecentLoan rl
+			WHERE l.obligor = o
+			AND rl.loan = l
+			AND rl.user = :user
+			ORDER BY rl.viewTime DESC
+		</query>
+	</named-query>
+	
+	<named-query name="Long.LoanItem.findLoanItemIdsByUserAndLoan">
+		<query>
+			SELECT li.loanItemId FROM LoanItem li, User u
+			WHERE u MEMBER OF li.users
+			AND li MEMBER OF u.loanItems
+			AND u = :user
+			AND li.loan.loanId = :loanId 
+			ORDER BY li.loanItemIndex ASC
+		</query>
+	</named-query>
+	
+	<named-query name="View.UserInfoInLoanItemList">
+		<query>
+			SELECT
+				lo.chineseName,
+				(SELECT ar.accountBalance FROM AccountRecord ar WHERE ar.operationTime = (SELECT MAX(ar.operationTime) FROM ar WHERE ar.user.userId = :userId))
+			FROM Loaner lo
+			WHERE lo.user.userId = :userId
+		</query>
+	</named-query>
+	
+	<named-query name="View.LentLoanHistory.findByUserId">
+		<query>
+			SELECT DISTINCT
+			NEW com.xiaodai.service.view.LentLoanHistoryView(
+				ob.obligorInfo.chineseName, 
+				(SELECT COUNT(li.loanItemId) 
+					FROM LoanItem li 
+					WHERE li.itemStatus = 'PAID' 
+					AND li.order = o
+					AND o.user = :user 
+					AND li.loan = l
+				),
+				(SELECT COUNT(li.loanItemId) 
+					FROM LoanItem li 
+					WHERE li.itemStatus = 'REPAID' 
+					AND li.order = o
+					AND o.user = :user 
+					AND li.loan = l
+				)
+			)
+			FROM 
+			Obligor ob, Loan l, LoanItem li, Order o
+			WHERE l.obligor = ob
+			AND li.loan = l
+			AND li.order = o
+			AND o.user = :user
+			AND li.itemStatus IN ('PAID', 'REPAID')
+		</query>
+	</named-query>
+	
+	<named-query name="View.LoanStatusCheck">
+		<query>
+			SELECT 
+			l.loanPeriod, 
+			(SELECT COUNT(li.loanItemId) 
+				FROM LoanItem li 
+				WHERE li.itemStatus = 'BOUGHT' 
+				AND li.loan = l 
+			)
+			FROM Loan l 
+			WHERE l.loanId = :loanId
+		</query>
+	</named-query>
+	
+	<named-query name="View.LoanRecommendationList">
+		<query>
+			SELECT NEW com.xiaodai.service.view.LoanRecommendationView(
+			l.loanId,
+			o.obligorInfo.chineseName,
+			o.obligorIconLocation,
+			o.loanGroup.loanCenter.village.town.townName,
+			o.loanGroup.loanCenter.village.town.city,
+			o.loanGroup.loanCenter.village.town.province,
+			l.usageType,
+			l.loanAmount) 
+			FROM Loan l, Obligor o 
+			WHERE l.obligor = o 
+			ORDER BY l.expectedEndDate DESC
+		</query>
+	</named-query>
+	
+	<named-query name="LoanItem.findLoanItemByUser">
+		<query>SELECT li FROM LoanItem li WHERE :user MEMBER OF li.users</query>
+	</named-query>
+	
+	<named-query name="List(Integer).LentLoanItem(loanItemIndex)-[user,loanId]">
+		<query>
+			SELECT 
+			li.loanItemIndex 
+			FROM 
+			LoanItem li, Order o
+			WHERE li.order = o 
+			AND li.loan.loanId = :loanId
+			AND o.user = :user
+			AND li.itemStatus IN ('PAID', 'REPAID')
+			ORDER BY 
+			li.loanItemIndex ASC
+		</query>
+	</named-query>
+	
+	<named-query name="[List(loanItemIndex:Integer, loanItemId:Long)]-[user:User, loanId:Integer]">
+		<query>
+			SELECT li.loanItemIndex, li.loanItemId
+			FROM LoanItem li
+			WHERE :user MEMBER OF li.users
+			AND li.loan.loanId = :loanId
+			AND li.order IS NULL
+			AND li.itemStatus = 'BUYABLE'
+			ORDER BY li.loanItemIndex ASC
+		</query>
+	</named-query>
+	
+	<named-query name="[List(LoanItem.loanItemIndex:Integer)]-[user:User, unavailableLoanId:Integer]">
+		<query>
+			SELECT li.loanItemIndex
+			FROM LoanItem li
+			WHERE :user MEMBER OF li.users
+			AND li.loan.loanId = :unavailableLoanId
+			AND li.itemStatus != 'BUYABLE'
+			ORDER BY li.loanItemIndex ASC
+		</query>
+	</named-query>
+	
+	<named-query name="List(LoanItem)-User.loanId">
+		<query>
+			SELECT li FROM LoanItem li, User u 
+			WHERE u MEMBER OF li.users
+			AND li MEMBER OF u.loanItems
+			AND u = :user
+			AND li.loan.loanId = :loanId
+		</query>
+	</named-query>
+	
+	<named-query name="Long-BoughtPeriod-User.loanId">
+		<query>
+			SELECT COUNT(li.loanItemId) FROM LoanItem li, User u, Order o
+			WHERE li.loan.loanId = :loanId
+			AND li.order = o
+			AND o.user = u
+			AND u = :user
+		</query>
+	</named-query>
+	
+	<named-query name="BigDecimal-LoanItemAmount-loanId">
+		<query>
+			SELECT l.loanItemAmount FROM Loan l WHERE l.loanId = :loanId
+		</query>
+	</named-query>
+	
+	<named-query name="Order-orderNumber">
+		<query>SELECT o FROM Order o WHERE o.orderNumber = :orderNumber</query>
+	</named-query>
+
+	<named-query name="View.DealRecordView">
+		<query>
+			SELECT DISTINCT
+			NEW com.xiaodai.service.view.DealRecordView(
+				l.expectedEndDate,
+				ob.obligorInfo.chineseName,
+				ob.loanGroup.loanCenter.village.villageName,
+				ob.loanGroup.loanCenter.village.town.townName,
+				ob.loanGroup.loanCenter.village.town.city,
+				ob.loanGroup.loanCenter.village.town.province,
+				l.usageType,
+				l.secondaryUsageType,
+				(SELECT COUNT(li.loanItemId) FROM li WHERE li.itemStatus = 'PAID' AND li.loan = l),
+				(SELECT COUNT(li.loanItemId) FROM li WHERE li.itemStatus = 'REPAID' AND li.loan = l),
+				(SELECT SUM(li.loanItemIndex) FROM li WHERE li.itemStatus = 'REPAID' AND li.loan = l),
+				l.loanItemAmount,
+				l.loanId
+			)
+			FROM Obligor ob, Loan l, LoanItem li, Order o
+			WHERE l.obligor = ob
+			AND li.loan = l
+			AND li.order = o
+			AND o.user = ?1
+			AND li.itemStatus IN ('PAID', 'REPAID')
+		</query>
+	</named-query>
+	
+	<named-query name="[loaner:Loaner]-[FETCH loaner.concernedProvinces]-[user:User]">
+		<query>SELECT DISTINCT lo FROM Loaner lo LEFT JOIN FETCH lo.concernedProvinces WHERE lo.user = :user</query>
+	</named-query>
+	
+	<named-query name="[View(RechargeFormView)]-[User(user)]">
+		<query>
+			SELECT DISTINCT
+			NEW com.xiaodaibao.view.RechargeFormView(
+				u.nickname,
+				lo.chineseName,
+				u.email,
+				(SELECT ar.accountBalance FROM ar WHERE ar.operationTime = (SELECT MAX(ar.operationTime) FROM AccountRecord ar WHERE :user = ar.user))
+			)
+			FROM User u, Loaner lo LEFT JOIN u.accountRecords AS ar
+			WHERE u = :user
+			AND lo.user = u
+		</query>
+	</named-query>
+	
+	<named-query name="[View(RefundFormView)]-[User(user)]">
+		<query>
+			SELECT NEW com.xiaodaibao.view.RefundFormView(
+				ar.accountBalance
+			)
+			FROM User u, AccountRecord ar
+			WHERE ar.user = u
+			AND u = :user
+			AND ar.operationTime = (SELECT MAX(ar.operationTime) FROM AccountRecord ar WHERE :user = ar.user)
+		</query>
+	</named-query>
+	
+	<named-query name="[View(LedgerHomeView)]-[User(user)]">
+		<query>
+			SELECT NEW com.xiaodaibao.view.LedgerHomeView(
+				u.nickname,
+				u.userIconLocation,
+				l.chineseName,
+				u.realValidationStatus,
+				u.cellPhone,
+				u.email,
+				u.registrationTime
+			)
+			FROM Loaner l, User u
+			WHERE l.user = u
+			AND u = :user
+		</query>
+	</named-query>
+	
+	<named-query name="[List(LoanItem)]-[loanId:Integer]">
+		<query>SELECT li FROM LoanItem li WHERE li.loan.loanId = :loanId</query>
+	</named-query>
+	
+	<named-query name="[accountBalance:BigDecimal]-[user:User]">
+		<query>
+			SELECT ar.accountBalance
+			FROM AccountRecord ar
+			WHERE ar.user = :user
+			AND ar.operationTime = (SELECT MAX(ar.operationTime) FROM AccountRecord ar WHERE :user = ar.user)
+		</query>
+	</named-query>
+	
+	<named-query name="[List(LedgerRecordView)]-[user:User]">
+		<query>
+			SELECT
+			NEW com.xiaodaibao.view.LedgerRecordView(
+				ar.operationTime,
+				ar.accountVariation,
+				ar.principal,
+				ar.interest,
+				ar.accountBalance,
+				ar.operationType,
+				(SELECT COUNT(DISTINCT ar.accountRecordId) FROM ar WHERE ar.user = :user)
+			)
+			FROM AccountRecord ar
+			WHERE ar.user = :user
+			ORDER BY ar.operationTime DESC
+		</query>
+	</named-query>
+	
+	<named-query name="[count:Long]-[List(LedgerDealView)]-[user:User]">
+		<query>
+			SELECT COUNT(DISTINCT l.loanId)
+			FROM Obligor ob, Loan l, LoanItem li, Order o
+			WHERE l.obligor = ob
+			AND li.loan = l
+			AND li.order = o
+			AND o.user = ?1
+			AND li.itemStatus IN ('PAID', 'REPAID')
+		</query>
+	</named-query>
+
+	<named-query name="[List(LedgerDealView)]-[user:User]">
+		<query>
+			SELECT DISTINCT
+			NEW com.xiaodaibao.view.LedgerDealView(
+				ob.obligorInfo.chineseName,
+				ob.loanGroup.loanCenter.village.town.province,
+				ob.loanGroup.loanCenter.village.town.city,
+				ob.loanGroup.loanCenter.village.town.townName,
+				ob.loanGroup.loanCenter.village.villageName,
+				l.usageType,
+				l.loanItemAmount,
+				(SELECT COUNT(li.loanItemId) FROM li WHERE li.itemStatus = 'PAID' AND li.loan = l),
+				(SELECT COUNT(li.loanItemId) FROM li WHERE li.itemStatus = 'REPAID' AND li.loan = l),
+				(SELECT COUNT(DISTINCT l.loanId) FROM l WHERE l.obligor = ob AND li.loan = l AND li.order = o AND o.user = :user AND li.itemStatus IN ('PAID', 'REPAID'))
+			)
+			FROM Obligor ob, Loan l, LoanItem li, Order o
+			WHERE l.obligor = ob
+			AND li.loan = l
+			AND li.order = o
+			AND o.user = :user
+			AND li.itemStatus IN ('PAID', 'REPAID')
+		</query>
+	</named-query>
+	
+	<named-query name="[numberOfDeletedEntities:int]-[user:User, loanId:Integer]">
+		<query>
+			DELETE FROM RecentLoan rl
+			WHERE rl.loan.loanId = :loanId
+			AND rl.user = :user
+		</query>
+	</named-query>
+	
+	<named-query name="[itemStatus:ItemStatus]-[loanItemId:Long]">
+		<query>
+			SELECT li.itemStatus FROM LoanItem li WHERE li.loanItemId = :loanItemId
+		</query>
+	</named-query>
+	<named-query name="LoanCenter.findByVillageId">
+		<query>
+			SELECT lc FROM LoanCenter lc WHERE lc.village.villageId = :villageId
+		</query>
+	</named-query>
+	
+	<named-query name="LoanGroup.findByLoanCenterId">
+		<query>
+			SELECT lg FROM LoanGroup lg WHERE lg.loanCenter.loanCenterId= :loanCenterId
+		</query>
+	</named-query>
+	
+	<named-query name="Creidter.findByLoanCenterId">
+		<query>
+			SELECT lc.crediter FROM LoanCenter lc WHERE lc.loanCenterId= :loanCenterId
+		</query>
+	</named-query>
+	
+	<named-query name="[loanGroup:LoanGroup]-[loanGroupName:String]">
+		<query>SELECT lg FROM LoanGroup lg WHERE lg.loanGroupName = :loanGroupName</query>
+	</named-query>
+	
+	<named-query name="[RefundRequest]-[user:User]">
+		<query>SELECT rr FROM RefundRequest rr WHERE rr.user = :user</query>
+	</named-query>
+	
+	<named-query name="[RefundRequest]-[ORDER(rr.requestTime):DESC]">
+		<query>
+			SELECT
+				rr.refundRequestId,
+				(SELECT COUNT(DISTINCT rr.refundRequestId) FROM rr),
+				rr.requestTime,
+				rr.user.email,
+				rr.sourceAccount,
+				rr.refundAmount,
+				rr.refundStatus
+			FROM RefundRequest rr
+			ORDER BY rr.requestTime DESC
+		</query>
+	</named-query>
+	
+	<named-query name="[List(FinishedLoanView))]-[orderTime:Date, crediter:Crediter]">
+		<query>
+			SELECT DISTINCT
+			NEW com.xiaodai.mis.service.view.FinishedLoanView(
+				ob.loanGroup.loanCenter.loanCenterName,
+				ob.loanGroup.loanGroupName,
+				ob.obligorNumber,
+				ob.obligorInfo.chineseName,
+				li.loanItemIndex,
+				l.loanAmount,
+				u.nickname,
+				o.orderTime,
+				(
+					SELECT COUNT(DISTINCT li.loanItemId) FROM li JOIN li.loan l JOIN l.obligor ob JOIN ob.loanGroup lg JOIN lg.loanCenter lc JOIN li.order o JOIN o.user u
+					WHERE o.orderTime = :orderTime
+					AND ob.loanGroup.loanCenter.crediter = :crediter
+					AND li.itemStatus = 'BOUGHT'
+				)
+			)
+			FROM LoanItem li JOIN li.loan l JOIN l.obligor ob JOIN ob.loanGroup lg JOIN lg.loanCenter lc JOIN li.order o JOIN o.user u
+			WHERE o.orderTime = :orderTime
+			AND ob.loanGroup.loanCenter.crediter = :crediter
+			AND li.itemStatus = 'BOUGHT'
+		</query>
+	</named-query>
+	
+	<named-query name="[List(Object[]:TownView)]">
+		<query>
+			SELECT DISTINCT
+				t.townId,
+				(SELECT COUNT(DISTINCT t) FROM t),
+				t.province,
+				t.city,
+				t.townName
+			FROM Town t
+		</query>
+	</named-query>
+
+	<named-query name="[UPDATE]-[townIds:List(Integer)]">
+		<query>UPDATE Village v SET v.town = NULL WHERE v.town.townId IN (:townIds)</query>
+	</named-query>
+
+	<named-query name="[DELETE]-[townId:Integer]">
+		<query>DELETE FROM Town t WHERE t.townId = :townId</query>
+	</named-query>
+
+	<named-query name="[DELETE]-[townIds:List(Integer)]">
+		<query>DELETE FROM Town t WHERE t.townId IN (:townIds)</query>
+	</named-query>
+
+	<named-query name="[List(Object[]:VillageView)]">
+		<query>
+			SELECT DISTINCT
+				v.villageId,
+				(SELECT COUNT(DISTINCT v) FROM v),
+				v.town.townId,
+				v.town.townName,
+				v.villageName
+			FROM Village v
+		</query>
+	</named-query>
+
+	<named-query name="[DELETE]-[villageId:Integer]">
+		<query>DELETE FROM Village v WHERE v.villageId = :villageId</query>
+	</named-query>
+
+	<named-query name="[List(Object[]:LoanCenterView)]">
+		<query>
+			SELECT DISTINCT
+				lc.loanCenterId,
+				(SELECT COUNT(DISTINCT lc) FROM lc),
+				lc.village.town.townId,
+				lc.village.town.townName,
+				lc.village.villageId,
+				lc.village.villageName,
+				lc.loanCenterName
+			FROM LoanCenter lc
+		</query>
+	</named-query>
+
+	<named-query name="[DELETE]-[loanCenterId:Long]">
+		<query>DELETE FROM LoanCenter lc WHERE lc.loanCenterId = :loanCenterId</query>
+	</named-query>
+	
+	<named-query name="[List(Object[]:LoanGroupView)]">
+		<query>
+			SELECT DISTINCT
+				lg.loanGroupId,
+				(SELECT COUNT(DISTINCT lg) FROM lg),
+				lg.loanCenter.village.town.townId,
+				lg.loanCenter.village.town.townName,
+				lg.loanCenter.village.villageId,
+				lg.loanCenter.village.villageName,
+				lg.loanCenter.loanCenterId,
+				lg.loanCenter.loanCenterName,
+				lg.loanGroupName
+			FROM LoanGroup lg
+		</query>
+	</named-query>
+	
+	<named-query name="[DELETE]-[loanGroupId:Long]">
+		<query>DELETE FROM LoanGroup lg WHERE lg.loanGroupId = :loanGroupId</query>
+	</named-query>
+	
+	<named-query name="[List(Object[loanCenterId:Long, loanCenterName:String])]-[villageId:Integer]">
+		<query>SELECT lc.loanCenterId, lc.loanCenterName FROM LoanCenter lc WHERE lc.crediter IS NULL AND lc.village.villageId = :villageId</query>
+	</named-query>
+
+	<named-query name="[List(CrediterView)]">
+		<query>
+			SELECT DISTINCT NEW com.xiaodai.mis.service.view.CrediterView(
+				c.crediterId,
+				(SELECT COUNT(DISTINCT c) FROM c),
+				c.chineseName,
+				c.cellPhone,
+				c.village.town.townId,
+				c.village.villageId,
+				c.village.villageName,
+				c.imageUrl
+			)
+			FROM Crediter c
+		</query>
+	</named-query>
+
+	<named-query name="[List(NestedCrediterLoanCenterView)]-[crediterId:Integer]">
+		<query>
+			SELECT DISTINCT NEW com.xiaodai.mis.service.view.NestedCrediterLoanCenterView(
+				lc.loanCenterId,
+				lc.loanCenterName
+			)
+			FROM LoanCenter lc
+			WHERE lc.crediter.crediterId = :crediterId
+		</query>
+	</named-query>
+
+	<named-query name="[DELETE]-[crediterId:Integer]">
+		<query>DELETE FROM Crediter c WHERE c.crediterId = :crediterId</query>
+	</named-query>
+	
+	<named-query name="[UPDATE]-[crediterIds:List(Integer)]">
+		<query>UPDATE LoanCenter lc SET lc.crediter = NULL WHERE lc.crediter.crediterId IN (:crediterIds)</query>
+	</named-query>
+	
+	<named-query name="[DELETE]-[crediterIds:List(Integer)]">
+		<query>DELETE FROM Crediter c WHERE c.crediterId IN (:crediterIds)</query>
+	</named-query>
+	-->
+</entity-mappings>
