@@ -2,6 +2,7 @@ package com.imd.focusrx.service;
 
 import java.util.List;
 
+import com.imd.focusrx.controller.dto.BriefDto;
 import com.imd.focusrx.entity.ContentItem;
 
 /**
@@ -44,5 +45,9 @@ public interface ContentItemService {
    * @return
    */
   public String ContentItemToString(Long itemId,List<ContentItem> list) ;
+
+  public List<BriefDto> getByBasicId(Long id);
+
+  public List<ContentItem> getByParentId(Long id);
 
 }

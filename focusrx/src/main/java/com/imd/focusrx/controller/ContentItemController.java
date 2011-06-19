@@ -44,8 +44,15 @@ public class ContentItemController {
 
   private final Logger logger = LoggerFactory.getLogger(ContentItemController.class);
 
+  private final String info2 = "secondinfo" ;
+
   @RequestMapping("/getInfo")
   public String getInfo(Model model){
+
+    // version is info2
+    if(true){
+      return "redirect:getinfo2";
+    }
 
     List<Province> provinceList = provinceService.getAll() ;
 
@@ -76,7 +83,7 @@ public class ContentItemController {
   public ContentItemAllDto getContent(
       @RequestParam("cid")Long cid){
     ContentItem c = this.contentItemService.getById(cid);
-    String attachment = new Gson().toJson(c.getAttachments());
+    String attachment = null;//new Gson().toJson(c.getAttachments());
     String content = c.getContent() ;
     List<ContentItem> list = this.contentItemService.getItemByParentId(cid);
     String str =this.contentItemService.ContentItemToString(cid, list);
@@ -89,4 +96,5 @@ public class ContentItemController {
 
     return dto ;
   }
+
 }

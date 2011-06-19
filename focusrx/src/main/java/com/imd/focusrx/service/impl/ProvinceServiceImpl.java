@@ -17,15 +17,22 @@ public class ProvinceServiceImpl implements ProvinceService {
   @Autowired
   private ProvinceRepository provinceRepository ;
 
+  @Override
   public List<Province> getAll() {
     return provinceRepository.findAll() ;
   }
 
+  @Override
   public Province add(Province province) {
     if(province==null){
       return null ;
     }
     return provinceRepository.save(province);
+  }
+
+  @Override
+  public List<Province> getByOrder() {
+    return this.provinceRepository.getByOrder() ;
   }
 
 }

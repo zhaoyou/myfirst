@@ -19,4 +19,8 @@ public interface ContentItemRepository extends JpaRepository<ContentItem, Long> 
   "item.directory.id=:did")
   public List<ContentItem> findByProvinceAndDirectory(@Param("pid")Integer provinceId,
       @Param("did")Integer directoryId);
+
+  @Query("from ContentItem c where c.basicItem.id=:basicId and c.parentId=0")
+  public List<ContentItem> findByBasic(@Param("basicId")Long id);
+
 }

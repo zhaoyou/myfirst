@@ -23,4 +23,6 @@ public interface ProvinceService {
    * @return
    */
   public Province add(Province province);
+
+  public List<Province> getByOrder();
 }

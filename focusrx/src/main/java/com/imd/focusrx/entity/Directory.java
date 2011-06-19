@@ -24,6 +24,9 @@ public class Directory {
   @Column(name="DIRECTORY_NAME")
   public String directoryName ;
 
+  @Column(name="FACTOR")
+  public String factor ;
+
   public Directory() {
     super();
   }
@@ -49,4 +52,14 @@ public class Directory {
   public void setDirectoryName(String directoryName) {
     this.directoryName = directoryName;
   }
+
+  public String getFactor() {
+    return factor;
+  }
+
+  public void setFactor(String factor) {
+    this.factor = factor;
+  }
+
+
 }

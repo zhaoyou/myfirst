@@ -1,7 +1,5 @@
 package com.imd.focusrx.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,8 +29,8 @@ public class ContentItem {
   private Province province ;
 
   @ManyToOne
-  @JoinColumn(name="DIRECTORY")
-  private Directory directory ;
+  @JoinColumn(name="BASICITEM")
+  private BasicItem basicItem ;
 
   @Column(name="NAME")
   private String name ;
@@ -47,20 +44,22 @@ public class ContentItem {
   @Column(name="PARENTID")
   private Long parentId ;
 
-  @OneToMany
-  private  List<Attachment> attachments = new ArrayList<Attachment>() ;
+  @Column(name="isShowDetail")
+  private Integer isShowDetail ;
+
+  //  @OneToMany
+  //  private  List<Attachment> attachments = new ArrayList<Attachment>() ;
 
   public ContentItem() {
     super();
   }
 
   public ContentItem(Long id,
-      String content, Long parentId, List<Attachment> attachments) {
+      String content, Long parentId) {
     super();
     this.id = id;
     this.content = content;
     this.parentId = parentId;
-    this.attachments = attachments;
   }
 
   public Long getId() {
@@ -81,12 +80,7 @@ public class ContentItem {
   public void setParentId(Long parentId) {
     this.parentId = parentId;
   }
-  public List<Attachment> getAttachments() {
-    return attachments;
-  }
-  public void setAttachments(List<Attachment> attachments) {
-    this.attachments = attachments;
-  }
+
   public Province getProvince() {
     return province;
   }
@@ -95,13 +89,6 @@ public class ContentItem {
     this.province = province;
   }
 
-  public Directory getDirectory() {
-    return directory;
-  }
-
-  public void setDirectory(Directory directory) {
-    this.directory = directory;
-  }
   public String getName() {
     return name;
   }
@@ -115,6 +102,22 @@ public class ContentItem {
 
   public void setRemark(String remark) {
     this.remark = remark;
+  }
+
+  public BasicItem getBasicItem() {
+    return basicItem;
+  }
+
+  public void setBasicItem(BasicItem basicItem) {
+    this.basicItem = basicItem;
+  }
+
+  public Integer getIsShowDetail() {
+    return isShowDetail;
+  }
+
+  public void setIsShowDetail(Integer isShowDetail) {
+    this.isShowDetail = isShowDetail;
   }
 
 }
