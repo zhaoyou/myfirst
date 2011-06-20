@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="DIRECTORY")
-public class Directory {
+public class Directory  implements Comparable{
 
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -59,6 +59,11 @@ public class Directory {
 
   public void setFactor(String factor) {
     this.factor = factor;
+  }
+
+  @Override
+  public int compareTo(Object arg0) {
+    return this.getFactor().compareTo(((Directory)arg0).getFactor());
   }
 
 

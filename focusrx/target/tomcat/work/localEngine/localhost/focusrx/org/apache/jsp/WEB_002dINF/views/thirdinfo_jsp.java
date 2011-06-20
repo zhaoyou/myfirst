@@ -12,8 +12,9 @@ public final class thirdinfo_jsp extends org.apache.jasper.runtime.HttpJspBase
   private static java.util.List _jspx_dependants;
 
   static {
-    _jspx_dependants = new java.util.ArrayList(2);
+    _jspx_dependants = new java.util.ArrayList(3);
     _jspx_dependants.add("/WEB-INF/views/header.jsp");
+    _jspx_dependants.add("/WEB-INF/views/nav.jsp");
     _jspx_dependants.add("/WEB-INF/views/footer.jsp");
   }
 
@@ -99,23 +100,36 @@ String basepath = "assets/";
       out.write("js/jquery-1.6.1.min.js\"></script>");
       out.write("\n");
       out.write("    <h1>基本药物 databass framework</h1>\n");
-      out.write("    <div class=\"directorydiv\">\n");
-      out.write("    序号: \n");
-      out.write("        <select id=\"directory\">\n");
-      out.write("            ");
+      out.write("     ");
+      out.write("\n");
+      out.write("<link rel=\"stylesheet\" href=\"");
+      out.print(basepath );
+      out.write("css/nav.css\" />\n");
+      out.write("\n");
+      out.write("<script type=\"text/javascript\">\n");
+      out.write("  function displaySubMenu(li) {\n");
+      out.write("    var subMenu = li.getElementsByTagName(\"ul\")[0];\n");
+      out.write("    subMenu.style.display = \"inline\";\n");
+      out.write("  }\n");
+      out.write("  function hideSubMenu(li) {\n");
+      out.write("    var subMenu = li.getElementsByTagName(\"ul\")[0];\n");
+      out.write("    subMenu.style.display = \"none\";\n");
+      out.write("  }\n");
+      out.write("</script>\n");
+      out.write("  <ul id=\"navigation\" style=\"display: block;\">\n");
+      out.write("    ");
       if (_jspx_meth_c_005fforEach_005f0(_jspx_page_context))
         return;
       out.write("\n");
-      out.write("        </select>\n");
-      out.write("    </div>\n");
-      out.write("    <div class=\"second_directory\">\n");
-      out.write("    ");
+      out.write("    <div style=\"clear: both;\"></div>\n");
+      out.write("  </ul>\n");
       out.write("\n");
-      out.write("    </div>\n");
+      out.write("    \n");
+      out.write("      ");
+      out.write("\n");
       out.write("    <div id=\"result_info\">\n");
       out.write("        <table id=\"result_table\">\n");
-      out.write("        ");
-      out.write("\n");
+      out.write("            <tr><td colspan=\"1\"><hr/></td></tr>\n");
       out.write("        </table>\n");
       out.write("    </div>\n");
       out.write("    ");
@@ -132,7 +146,7 @@ String basepath = "assets/";
       out.write("  <p>方括 版权所有</p>\n");
       out.write("  <p>&#169; 2011 focusrxsearch.com.All rights reserved.</p>\n");
       out.write("</footer>\n");
-      out.write("\n");
+      out.write(" \n");
       out.write("    <script type=\"text/javascript\" src=\"");
       out.print(basepath);
       out.write("js/info3.js\"></script>\n");
@@ -158,24 +172,29 @@ String basepath = "assets/";
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_005fforEach_005f0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_005fforEach_005f0.setPageContext(_jspx_page_context);
     _jspx_th_c_005fforEach_005f0.setParent(null);
-    // /WEB-INF/views/thirdinfo.jsp(19,12) name = items type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
-    _jspx_th_c_005fforEach_005f0.setItems(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/thirdinfo.jsp(19,12) '${directoryList }'",_el_expressionfactory.createValueExpression(_jspx_page_context.getELContext(),"${directoryList }",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
-    // /WEB-INF/views/thirdinfo.jsp(19,12) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
-    _jspx_th_c_005fforEach_005f0.setVar("d");
+    // /WEB-INF/views/nav.jsp(15,4) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_c_005fforEach_005f0.setVar("menuItem");
+    // /WEB-INF/views/nav.jsp(15,4) name = items type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
+    _jspx_th_c_005fforEach_005f0.setItems(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/nav.jsp(15,4) '${menu }'",_el_expressionfactory.createValueExpression(_jspx_page_context.getELContext(),"${menu }",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
     int[] _jspx_push_body_count_c_005fforEach_005f0 = new int[] { 0 };
     try {
       int _jspx_eval_c_005fforEach_005f0 = _jspx_th_c_005fforEach_005f0.doStartTag();
       if (_jspx_eval_c_005fforEach_005f0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
           out.write("\n");
-          out.write("                 <option value=\"");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${d.id }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-          out.write('"');
-          out.write('>');
-          out.write(' ');
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${d.directoryName }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
-          out.write("</option>\n");
-          out.write("            ");
+          out.write("      <li onmouseover=\"displaySubMenu(this)\"\n");
+          out.write("      onmouseout=\"hideSubMenu(this)\">\n");
+          out.write("      <a href=\"#\">");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${menuItem.key.directoryName }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+          out.write("</a>\n");
+          out.write("      <ul>\n");
+          out.write("      ");
+          if (_jspx_meth_c_005fforEach_005f1(_jspx_th_c_005fforEach_005f0, _jspx_page_context, _jspx_push_body_count_c_005fforEach_005f0))
+            return true;
+          out.write("\n");
+          out.write("      </ul>\n");
+          out.write("      </li>\n");
+          out.write("    ");
           int evalDoAfterBody = _jspx_th_c_005fforEach_005f0.doAfterBody();
           if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
             break;
@@ -191,6 +210,52 @@ String basepath = "assets/";
     } finally {
       _jspx_th_c_005fforEach_005f0.doFinally();
       _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems.reuse(_jspx_th_c_005fforEach_005f0);
+    }
+    return false;
+  }
+
+  private boolean _jspx_meth_c_005fforEach_005f1(javax.servlet.jsp.tagext.JspTag _jspx_th_c_005fforEach_005f0, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_005fforEach_005f0)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_005fforEach_005f1 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_005fforEach_005f1.setPageContext(_jspx_page_context);
+    _jspx_th_c_005fforEach_005f1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fforEach_005f0);
+    // /WEB-INF/views/nav.jsp(20,6) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    _jspx_th_c_005fforEach_005f1.setVar("subMenu");
+    // /WEB-INF/views/nav.jsp(20,6) name = items type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
+    _jspx_th_c_005fforEach_005f1.setItems(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/nav.jsp(20,6) '${menuItem.value }'",_el_expressionfactory.createValueExpression(_jspx_page_context.getELContext(),"${menuItem.value }",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
+    int[] _jspx_push_body_count_c_005fforEach_005f1 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_005fforEach_005f1 = _jspx_th_c_005fforEach_005f1.doStartTag();
+      if (_jspx_eval_c_005fforEach_005f1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\n");
+          out.write("        <li><a href=\"javascript:getResult(");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${subMenu.id }", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+          out.write(')');
+          out.write('"');
+          out.write('>');
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${subMenu.name}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
+          out.write("</a>\n");
+          out.write("        </li>\n");
+          out.write("      ");
+          int evalDoAfterBody = _jspx_th_c_005fforEach_005f1.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_005fforEach_005f1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_005fforEach_005f1[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_005fforEach_005f1.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_005fforEach_005f1.doFinally();
+      _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems.reuse(_jspx_th_c_005fforEach_005f1);
     }
     return false;
   }

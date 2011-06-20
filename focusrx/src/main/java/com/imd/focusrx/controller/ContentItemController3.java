@@ -1,6 +1,8 @@
 package com.imd.focusrx.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.imd.focusrx.entity.ContentItem;
 import com.imd.focusrx.entity.Directory;
 import com.imd.focusrx.entity.Province;
+import com.imd.focusrx.entity.SecondDirectory;
 import com.imd.focusrx.service.BasicItemService;
 import com.imd.focusrx.service.ContentItemService;
 import com.imd.focusrx.service.DirectoryService;
@@ -23,6 +27,8 @@ import com.imd.focusrx.service.ProvinceService;
 public class ContentItemController3 {
 
   private final String info3 = "thirdinfo" ;
+
+  private final String SHOWDETAIL = "showdetail";
 
   @Autowired
   private ProvinceService provinceService ;
@@ -49,6 +55,9 @@ public class ContentItemController3 {
     List<Province> provinceList = this.provinceService.getByOrder() ;
     model.addAttribute("provinceList", provinceList);
 
+    TreeMap<Directory, List<SecondDirectory>> map = this.directoryService.getMenu() ;
+    model.addAttribute("menu", map);
+
     return  info3 ;
   }
 
@@ -62,12 +71,9 @@ public class ContentItemController3 {
   public String getContentItem(@RequestParam("id")Long id,Model model){
     List<ContentItem> childs = this.contentItemService.getByParentId(id);
     ContentItem item = this.contentItemService.getById(id);
-
     model.addAttribute("contentItemList",childs);
     model.addAttribute("item", item);
-    logger.debug("size: "+childs.size());
-    logger.debug(item.toString());
-    return "redirect:http://google.com";
+    return this.SHOWDETAIL;
   }
 
 }

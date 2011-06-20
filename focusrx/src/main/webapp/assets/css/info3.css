@@ -22,7 +22,7 @@ margin-left: 50px;
 }
 
 #result_info{
-
+margin-left: 30px;
 }
 
 #result_table{
@@ -31,21 +31,29 @@ margin-left: 10px;
 }
 
 #result_table th {
-    text-align: center; 
+  text-align: left;
   }
 .second_item{
     margin-left: 20px;
 }
 
 .table_privince{
-   height: 30px;
-    padding-left: 30px;
+   height: 70px;
     padding-right: 30px;
+    width: 53px ;
   }
   
   .table_content{
-    text-align: center;
+    padding-left:5px;
     width: 150px;
+    padding-top:10px;
+    padding-right:4px;
   }
+  
+  .table_content_long {
+    padding-left: 5px;
+    padding-top: 10px;
+    width: 290px;
+    padding-right:10px;
 
 

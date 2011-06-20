@@ -80,7 +80,8 @@ public class BasicItemServiceImpl implements BasicItemService {
           String content = list.get(i).getContent();
 
           if(content.length()<=15){
-            objloop[td_column_index++] = content ;
+            String tip = "<span title="+content+">"+content+"</span>";
+            objloop[td_column_index++] = tip ;
           }else{
             String tip = "<span title='"+content+"'>"+content.substring(0, 15)+ "...."+"</span>" ;
             objloop[td_column_index++] = tip;

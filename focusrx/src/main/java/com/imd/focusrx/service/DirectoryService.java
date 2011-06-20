@@ -1,8 +1,10 @@
 package com.imd.focusrx.service;
 
 import java.util.List;
+import java.util.TreeMap;
 
 import com.imd.focusrx.entity.Directory;
+import com.imd.focusrx.entity.SecondDirectory;
 
 /**
  *
@@ -23,4 +25,6 @@ public interface DirectoryService {
    * @return
    */
   public Directory add(Directory directory) ;
+
+  public TreeMap<Directory, List<SecondDirectory>> getMenu();
 }
