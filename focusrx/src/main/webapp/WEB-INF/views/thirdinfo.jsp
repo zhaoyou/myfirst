@@ -7,8 +7,7 @@
 <title>基本药物 databass framework</title>
 <%String basepath = "assets/"; %>
 <link rel="stylesheet" href="<%=basepath %>css/info3.css">
-<link rel="stylesheet" href="<%=basepath %>css/showDetail.css" />
-<script type="text/javascript" src="<%=basepath %>js/showDetail.js"></script>
+
 
 </head>
 <body>
@@ -40,10 +39,7 @@
             --%>
         </table>
     </div>
-      <div id="showDetail" style="display: none"
-    onmouseout="this.style.display='none'"></div>
     <%@include file="footer.jsp" %>
     <script type="text/javascript" src="<%=basepath%>js/info3.js"></script>
-    
 </body>
 </html>
