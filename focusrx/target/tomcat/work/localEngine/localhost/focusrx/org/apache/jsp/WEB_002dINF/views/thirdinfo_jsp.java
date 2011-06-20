@@ -71,6 +71,13 @@ String basepath = "assets/";
       out.write("<link rel=\"stylesheet\" href=\"");
       out.print(basepath );
       out.write("css/info3.css\">\n");
+      out.write("<link rel=\"stylesheet\" href=\"");
+      out.print(basepath );
+      out.write("css/showDetail.css\" />\n");
+      out.write("<script type=\"text/javascript\" src=\"");
+      out.print(basepath );
+      out.write("js/showDetail.js\"></script>\n");
+      out.write("\n");
       out.write("</head>\n");
       out.write("<body>\n");
       out.write("    ");
@@ -116,6 +123,8 @@ String basepath = "assets/";
       out.write("\n");
       out.write("        </table>\n");
       out.write("    </div>\n");
+      out.write("      <div id=\"showDetail\" style=\"display: none\"\n");
+      out.write("    onmouseout=\"this.style.display='none'\"></div>\n");
       out.write("    ");
       out.write("\n");
       out.write("<footer>\n");
@@ -134,6 +143,7 @@ String basepath = "assets/";
       out.write("    <script type=\"text/javascript\" src=\"");
       out.print(basepath);
       out.write("js/info3.js\"></script>\n");
+      out.write("    \n");
       out.write("</body>\n");
       out.write("</html>");
     } catch (Throwable t) {
@@ -156,9 +166,9 @@ String basepath = "assets/";
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_005fforEach_005f0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _005fjspx_005ftagPool_005fc_005fforEach_0026_005fvar_005fitems.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_005fforEach_005f0.setPageContext(_jspx_page_context);
     _jspx_th_c_005fforEach_005f0.setParent(null);
-    // /WEB-INF/views/thirdinfo.jsp(17,12) name = items type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
-    _jspx_th_c_005fforEach_005f0.setItems(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/thirdinfo.jsp(17,12) '${directoryList }'",_el_expressionfactory.createValueExpression(_jspx_page_context.getELContext(),"${directoryList }",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
-    // /WEB-INF/views/thirdinfo.jsp(17,12) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /WEB-INF/views/thirdinfo.jsp(20,12) name = items type = javax.el.ValueExpression reqTime = true required = false fragment = false deferredValue = true expectedTypeName = java.lang.Object deferredMethod = false methodSignature = null
+    _jspx_th_c_005fforEach_005f0.setItems(new org.apache.jasper.el.JspValueExpression("/WEB-INF/views/thirdinfo.jsp(20,12) '${directoryList }'",_el_expressionfactory.createValueExpression(_jspx_page_context.getELContext(),"${directoryList }",java.lang.Object.class)).getValue(_jspx_page_context.getELContext()));
+    // /WEB-INF/views/thirdinfo.jsp(20,12) name = var type = java.lang.String reqTime = false required = false fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fforEach_005f0.setVar("d");
     int[] _jspx_push_body_count_c_005fforEach_005f0 = new int[] { 0 };
     try {

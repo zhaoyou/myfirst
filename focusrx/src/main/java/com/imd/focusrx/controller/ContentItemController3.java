@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.imd.focusrx.entity.ContentItem;
 import com.imd.focusrx.entity.Directory;
 import com.imd.focusrx.entity.Province;
 import com.imd.focusrx.service.BasicItemService;
+import com.imd.focusrx.service.ContentItemService;
 import com.imd.focusrx.service.DirectoryService;
 import com.imd.focusrx.service.ProvinceService;
 
@@ -28,6 +30,9 @@ public class ContentItemController3 {
 
   @Autowired
   private BasicItemService basicItemService ;
+
+  @Autowired
+  private ContentItemService contentItemService ;
 
 
   @RequestMapping("/getinfo3")
@@ -47,5 +52,16 @@ public class ContentItemController3 {
   @ResponseBody
   public List<Object[]> getResultTable(@RequestParam("id")Long id){
     return basicItemService.getTableInfo(id);
+  }
+
+  @RequestMapping("/getContentItem")
+  @ResponseBody
+  public ContentItem getContentItem(@RequestParam("id")Long id){
+    return contentItemService.getById(id);
+  }
+
+  @RequestMapping("/index1")
+  public String getIndex1(){
+    return "index1" ;
   }
 }

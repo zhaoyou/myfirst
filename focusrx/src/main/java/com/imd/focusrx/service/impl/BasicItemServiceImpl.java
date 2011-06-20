@@ -73,14 +73,19 @@ public class BasicItemServiceImpl implements BasicItemService {
 
         //do handler show tip or text
         if(list.get(i).getIsShowDetail().equals(1)){
-          objloop[td_column_index++] = "详细信息" ;
+          String s = "<a onmouseover=\"OpenDiv(400,200,'getContentItem?id="+list.get(i).getId()+"')"+
+          " onmouseout=\"document.getElementById('showDetail').style.display='none'"+
+          " href=\"#\">详细</a>";
+          objloop[td_column_index++] = s ;
         }else{
-          String content = list.get(i).getContent()  ;
+          String content = list.get(i).getContent();
 
           if(content.length()<=5){
             objloop[td_column_index++] = content ;
           }else{
-            objloop[td_column_index++] = content.substring(0, 5)+ "....";
+            String tip = "<span title='"+content+"'>"+content.substring(0, 5)+ "...."+"</span>" ;
+
+            objloop[td_column_index++] = tip;
           }
         }
       }
