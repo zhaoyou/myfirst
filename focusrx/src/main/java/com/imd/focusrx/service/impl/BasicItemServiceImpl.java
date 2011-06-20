@@ -84,7 +84,6 @@ public class BasicItemServiceImpl implements BasicItemService {
             objloop[td_column_index++] = content ;
           }else{
             String tip = "<span title='"+content+"'>"+content.substring(0, 5)+ "...."+"</span>" ;
-
             objloop[td_column_index++] = tip;
           }
         }
