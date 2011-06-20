@@ -1,0 +1,134 @@
+body {
+  width: 960px;
+  box-shadow: 0 0 20px silver;
+  -moz-box-shadow: 0 0 20px silver;
+  -webkit-box-shadow: 0 0 20px silver;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  margin: 20px auto 40px;
+  font-family: arial, sans-serif;
+}
+
+header nav {
+  overflow: hidden;
+  -webkit-border-radius: 6px;
+  background-color: #3092AF;
+  height: 42px;
+  position: relative;
+}
+
+nav ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+#logo {
+  width: 150px;
+  height: 42px;
+}
+
+nav ul li {
+  float: left;
+  list-style: none outside none;
+}
+nav ul li.nav {
+  cursor: pointer;
+  width: 125px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 42px;
+}
+
+nav ul li a {
+  color: #FFF;
+  line-height: 42px;
+  display: block;
+  text-decoration: none;
+}
+nav ul li.nav:hover {
+  box-shadow: 0 0 50px #485356 inset;
+  -moz-box-shadow: 0 0 50px #485356 inset;
+  -webkit-box-shadow: 0 0 50px #485356 inset;
+}
+#nav-center {
+  position: relative;
+}
+#message-box {
+  background-color: #F13843;
+  position: absolute;
+  left: 93px;
+  top: 4px;
+  height: 16px;
+  line-height: 16px;
+  min-width: 27px;
+  text-align: center;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  font-size: 11px;
+  border: 1px solid #FFF;
+  background: -webkit-gradient(linear, left top, left bottom, from(#F66), to(#C00));  
+  background: -moz-linear-gradient(top, #F66, #C00);
+  padding: 0;
+}
+
+/*search*/
+#nav-search {
+  margin: 9px;
+  height: 25px;
+  width: 285px;
+  line-height: 25px;
+  background: #FFF;
+  -webkit-border-radius: 5px;
+  border: 1px solid silver;
+  overflow: hidden;
+}
+
+#nav-search input {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  height: 25px;
+  width: 130px;
+  position:relative;
+  top:-4px;
+}
+
+#nav-search select {
+  width: 57px;
+  height: 25px;
+  position:relative;
+  top:-4px;
+  border: none;
+}
+
+#nav-search button {
+  -webkit-border-radius: 5px;
+  position:relative;
+  top:-6px;
+  left: -4px;
+  width: 66px;
+  height: 28px;
+  border: 1px solid #FFF;
+  background-color: #4CA22C;
+}
+#notification {
+  position: absolute;
+  top: 173px;
+  left: 993px;
+  width: 200px;
+  height: 40px;
+  background-color: silver;
+  color: #FFF;
+}
+
+/*bread crumbs*/
+#bread-crumbs {
+  color: #415A95;
+  font-size: 14px;
+}
+
+#bread-crumbs a {
+  color: #415A95;
+}

@@ -1,0 +1,35 @@
+#index * {
+  border: 1px solid silver;
+}
+#quick-entry {
+}
+#quick-entry img {
+  width: 22%;
+  height: 130px;
+  padding: 10px;
+}
+
+#login-search {
+  width: 240px;
+  float: right;
+  height: 530px;
+}
+#login-search .login {
+  width: 230px;
+  height: 200px;
+}
+#login-search .search {
+  width: 230px;
+  height: 320px;
+}
+
+#index-content {
+  margin-right: 240px;
+  height: 670px;
+  width: 700px;
+}
+#index-content .part{
+  width:49%;
+  height: 330px;
+  float: left;
+}

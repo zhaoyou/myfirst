@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+  <mvc:resources location="/assets/" mapping="/assets/**" />
+  <mvc:view-controller path="/" view-name="index" />
+  
+   <context:component-scan base-package="com.imd.focusrx" />
+  
+  <bean id="jspViewResolver"
+    class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="viewClass"
+      value="org.springframework.web.servlet.view.JstlView" />
+    <property name="prefix" value="/WEB-INF/views/" />
+    <property name="suffix" value=".jsp" />
+  </bean>
+  
+    <mvc:annotation-driven />
+    
+    <!--  
+   <mvc:interceptors>
+     <mvc:interceptor>
+        <mvc:mapping path="/*"/>
+        <bean class="com.zhaoyou.first.interceptor.MyInterceptor"></bean>
+     </mvc:interceptor>
+   </mvc:interceptors>
+   -->
+   <!-- 根据客户浏览器自动判断 
+   <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basename" value="i18n/text"></property>
+   </bean>
+  
+     <mvc:interceptors>
+    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+      <property name="paramName" value="locale" />
+    </bean>
+  </mvc:interceptors>
+   -->
+   <!-- 国际化部分 
+  <bean id="messageSource"
+    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <property name="cacheSeconds" value="-1" />
+    <property name="defaultEncoding" value="UTF-8" />
+    <property name="basenames">
+      <list>
+        <value>classpath:i18n/text</value>
+      </list>
+    </property>
+  </bean>
+-->
+  
+    <!-- 
+  <bean id="localeResolver"
+    class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+    <property name="defaultLocale" value="zh" />
+  </bean>
+
+  <bean
+    class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    <property name="messageConverters">
+      <list>
+        <ref bean="mappingJacksonHttpMessageConverter" />
+        <ref bean="stringHttpMessageConverter"/>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="mappingJacksonHttpMessageConverter"
+    class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+     
+     <bean id="stringHttpMessageConverter" 
+       class="org.springframework.http.converter.StringHttpMessageConverter"/>
+
+  
+  <bean id="marshallingHttpMessageConverter" 
+      class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+  <property name="marshaller" ref="castorMarshaller" />
+  <property name="unmarshaller" ref="castorMarshaller" />
+</bean>
+
+<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller"/>
+  -->
+</beans>

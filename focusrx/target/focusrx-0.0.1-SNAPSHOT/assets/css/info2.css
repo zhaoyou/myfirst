@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+
+.directorydiv{
+    margin-left : 50px;
+}
+
+#directory{
+ text-align: center;
+    width: 150px;
+}
+
+.second_directory{
+margin-left: 50px;
+    margin-top: 10px;
+    padding-left: 50px;
+    background-color: #F0F0F0;
+    margin-right: 50px;
+}
+
+.second_directory a{
+    text-decoration: none ;
+}
+
+
+.second_item{
+    margin-left: 20px;
+}
+
+.column_class{
+margin-left: 80px;
+    margin-top: 10px;
+    padding-left: 50px;
+    background-color: #F0F0F0;
+    margin-right: 50px;
+}
+
+.column_class a{
+    text-decoration: none ;
+}
+
+.column_item{
+    margin-left: 12px;
+}
+
+.mainContent{
+
+}
+
+.content{
+ padding-left: 62px;
+}
+
+.provicetd{
+    height: 50px;
+    width: 70px;
+}
+
+.td_format{
+   padding-bottom: 5px;
+   padding-top: 5px;
+}

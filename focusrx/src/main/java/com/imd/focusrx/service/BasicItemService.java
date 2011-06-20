@@ -6,4 +6,6 @@ import com.imd.focusrx.entity.BasicItem;
 
 public interface BasicItemService {
   public List<BasicItem> getBySecond(Long id);
+
+  public List<Object[]> getTableInfo(Long id);
 }

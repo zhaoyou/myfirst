@@ -23,4 +23,7 @@ public interface ContentItemRepository extends JpaRepository<ContentItem, Long> 
   @Query("from ContentItem c where c.basicItem.id=:basicId and c.parentId=0")
   public List<ContentItem> findByBasic(@Param("basicId")Long id);
 
+  @Query("from ContentItem c where c.basicItem.id=:basicId and c.parentId=0 order by c.province.id")
+  public List<ContentItem> findByBasicOrderPrivince(@Param("basicId")Long id);
+
 }

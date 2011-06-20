@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+
+.directorydiv{
+    margin-left : 50px;
+}
+
+#directory{
+ text-align: center;
+    width: 150px;
+}
+
+.second_directory{
+margin-left: 50px;
+    margin-top: 10px;
+    padding-left: 50px;
+    background-color: #F0F0F0;
+    margin-right: 50px;
+}
+
+.second_directory a{
+    text-decoration: none ;
+}
+
+#result_info{
+
+}
+
+#result_table{
+margin-left: 10px;
+ margin-top: 15px;
+}
+
+#result_table th {
+    text-align: center; 
+  }
+.second_item{
+    margin-left: 20px;
+}
+
+.table_privince{
+   height: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  
+  .table_content{
+    text-align: center;
+    width: 150px;
+  }
+
+
